@@ -28,7 +28,7 @@ const CreateBlog = () => {
     e.preventDefault();
     try {
       const token = localStorage.getItem('token');
-      await axios.post('http://localhost:5000/api/blogs', 
+      await axios.post('https://blogger-o29n.onrender.com/api/blogs', 
         {
           ...formData,
           tags: formData.tags.split(',').map(tag => tag.trim()),

@@ -28,7 +28,7 @@ const BlogDetail = () => {
   useEffect(() => {
     const fetchBlog = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/blogs/${id}`);
+        const response = await axios.get(`https://blogger-o29n.onrender.com/api/blogs/${id}`);
         setBlog(response.data);
       } catch (error) {
         setError('Failed to load blog post');
@@ -41,7 +41,7 @@ const BlogDetail = () => {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`http://localhost:5000/api/blogs/${id}`, {
+      await axios.delete(`https://blogger-o29n.onrender.com/api/blogs/${id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       navigate('/');

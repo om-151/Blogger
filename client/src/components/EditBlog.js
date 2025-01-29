@@ -25,7 +25,7 @@ const EditBlog = () => {
   useEffect(() => {
     const fetchBlog = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/blogs/${id}`);
+        const response = await axios.get(`https://blogger-o29n.onrender.com/api/blogs/${id}`);
         const blog = response.data;
         setFormData({
           title: blog.title,
@@ -50,7 +50,7 @@ const EditBlog = () => {
     e.preventDefault();
     try {
       await axios.patch(
-        `http://localhost:5000/api/blogs/${id}`,
+        `https://blogger-o29n.onrender.com/api/blogs/${id}`,
         {
           ...formData,
           tags: formData.tags.split(',').map(tag => tag.trim()),
