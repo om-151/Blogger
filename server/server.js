@@ -11,7 +11,7 @@ app.use(express.json());
 app.use(morgan('dev'));
 const corsOptions = {
     origin: (origin, callback) => {
-        const allowedOrigins = ["https://blogger-client-su4z.onrender.com"];
+        const allowedOrigins = "https://blogger-client-su4z.onrender.com";
         const isAllowed = allowedOrigins.includes(origin);
         callback(null, isAllowed ? origin : false)
     },
