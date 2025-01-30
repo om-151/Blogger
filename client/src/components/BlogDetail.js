@@ -251,9 +251,9 @@ const BlogDetail = () => {
           {blog.content}
         </Typography>
         {blog.tags && blog.tags.length > 0 && (
-          <Stack direction="row" spacing={1} sx={{ mt: 3, flexWrap: 'wrap', m: 2 }}>
+          <Stack direction="row" spacing={1} sx={{ mt: 3, flexWrap: 'wrap' }}>
             {blog.tags.map((tag, index) => (
-              <Chip key={index} label={tag} variant="outlined" />
+              <Chip key={index} label={tag} variant="outlined" sx={{ m: 2 }} />
             ))}
           </Stack>
         )}
