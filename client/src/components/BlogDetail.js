@@ -152,8 +152,10 @@ import {
   DialogContent,
   DialogActions,
   CircularProgress,
-  Fade
+  Fade,
+  useMediaQuery
 } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import axios from 'axios';
 
 const BlogDetail = () => {
@@ -163,6 +165,8 @@ const BlogDetail = () => {
   const [loading, setLoading] = useState(true);
   const [openDialog, setOpenDialog] = useState(false);
   const [error, setError] = useState('');
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const user = JSON.parse(localStorage.getItem('user') || '{}');
   const token = localStorage.getItem('token');
@@ -217,8 +221,8 @@ const BlogDetail = () => {
   const isAuthor = user.id === blog.author._id;
 
   return (
-    <Container maxWidth="md" sx={{ mt: 4 }}>
-      <Paper elevation={3} sx={{ p: 4 }}>
+    <Container maxWidth="md" sx={{ mt: 4, overflowX: 'hidden' }}>
+      <Paper elevation={3} sx={{ p: isMobile ? 2 : 4, overflowX: 'hidden' }}>
         {blog.image && (
           <Box
             component="img"
@@ -229,12 +233,13 @@ const BlogDetail = () => {
               objectFit: 'cover',
               borderRadius: 1,
               mb: 3,
+              display: 'block',
             }}
             src={blog.image}
             alt={blog.title}
           />
         )}
-        <Typography variant="h3" gutterBottom>
+        <Typography variant={isMobile ? "h5" : "h3"} gutterBottom>
           {blog.title}
         </Typography>
         <Box sx={{ mb: 3 }}>
@@ -242,18 +247,18 @@ const BlogDetail = () => {
             By {blog.author.username} | {new Date(blog.createdAt).toLocaleDateString()}
           </Typography>
         </Box>
-        <Typography variant="body1" paragraph sx={{ whiteSpace: 'pre-wrap' }}>
+        <Typography variant="body1" paragraph sx={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>
           {blog.content}
         </Typography>
         {blog.tags && blog.tags.length > 0 && (
-          <Stack direction="row" spacing={1} sx={{ mt: 3 }}>
+          <Stack direction="row" spacing={1} sx={{ mt: 3, flexWrap: 'wrap' }}>
             {blog.tags.map((tag, index) => (
               <Chip key={index} label={tag} variant="outlined" />
             ))}
           </Stack>
         )}
         {isAuthor && (
-          <Box sx={{ mt: 4, display: 'flex', gap: 2 }}>
+          <Box sx={{ mt: 4, display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: 2 }}>
             <Button
               variant="contained"
               color="primary"
